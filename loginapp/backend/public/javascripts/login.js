@@ -31,7 +31,8 @@ $button.addEventListener('click', function() {
     clientID: "B7L6Fztdma1RJBZx830uTvwLl5ihgeoE", // string
     responseType: 'token', // code or token
     redirectUri: 'http://localhost:3000/welcome/',
-    scope: 'openid profile email',state:state
+    scope: 'openid profile email',state:state,
+    audience :'BI'
   });
   localStorage.setItem("state", state);
   window.location.href = url;

@@ -1,18 +1,10 @@
 body {
   background: #f1c40f;
 }
-
-.button {
+.button{
   background: #3498db;
   width: 180px;
   padding: 4px 0;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  border-radius: 3px;
-}
-.button p {
   font-family: "Roboto";
   text-align: center;
   text-transform: uppercase;
@@ -22,10 +14,30 @@ body {
       -ms-user-select: none;
           user-select: none;
 }
-.button:hover {
+.jelly_button {
+  background: #3498db;
+  width: 180px;
+  padding: 4px 0;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  border-radius: 3px;
+}
+.jelly_button p {
+  font-family: "Roboto";
+  text-align: center;
+  text-transform: uppercase;
+  color: #FFF;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.jelly_button:hover {
   cursor: pointer;
 }
-.button:after {
+.jelly_button:after {
   content: "";
   display: block;
   position: absolute;

@@ -1,3 +1,5 @@
+const upload = new up();
+
 // initialize webauth object
 var webAuth = new auth0.WebAuth({
   domain:       'dev-8tto1d7k.eu.auth0.com',
@@ -15,18 +17,19 @@ if (state == localStorage.getItem('state') )
 {
   // if all ok request user info and log it
 console.log(accessToken);
-  webAuth.client.userInfo(accessToken, function(err, user) {
-      // This method will make a request to the /userinfo endpoint
-      // and return the user object, which contains the user's information,
-      // similar to the response below.
-      if (err) {
-        return console.log(err);
-      }
-      console.log(user);
-  });
+  // webAuth.client.userInfo(accessToken, function(err, user) {
+  //     // This method will make a request to the /userinfo endpoint
+  //     // and return the user object, which contains the user's information,
+  //     // similar to the response below.
+  //     if (err) {
+  //       return console.log(err);
+  //     }
+  //     console.log(user);
+  // });
 
+  upload.upload_data(accessToken);
   //button animation and logout functionality
-  var $button = document.querySelector('.button');
+  var $button = document.querySelector('#log_out');
   $button.addEventListener('click', function() {
   var duration = 0.3,
       delay = 0.08;
