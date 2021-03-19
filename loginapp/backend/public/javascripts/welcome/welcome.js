@@ -1,5 +1,8 @@
 const upload = new up();
-
+var uploadButt = document.getElementById('upload');
+uploadButt.onclick = function (e){
+  uploadButt.value='';
+}
 // initialize webauth object
 var webAuth = new auth0.WebAuth({
   domain:       'dev-8tto1d7k.eu.auth0.com',
@@ -16,6 +19,8 @@ console.log(state)
 if (state == localStorage.getItem('state') )
 {
   // if all ok request user info and log it
+  var report1_butt = document.getElementById('report1');
+  report1_butt.checked = true;
 console.log(accessToken);
   // webAuth.client.userInfo(accessToken, function(err, user) {
   //     // This method will make a request to the /userinfo endpoint
@@ -26,9 +31,12 @@ console.log(accessToken);
   //     }
   //     console.log(user);
   // });
-  cols = ['DATE','COUNTRY','CITY','STORE','BRAND','PRODUCT','SOLDUNITS','ONHANDUNITS','SOLDAMOUNT','ONHANDAMOUNT']
-  table = 'pos'
-  upload.upload_data(accessToken,cols,table);
+  // upload functionality
+  
+  
+  
+  upload.upload_data(accessToken);
+
   //button animation and logout functionality
   var $button = document.querySelector('#log_out');
   $button.addEventListener('click', function() {
