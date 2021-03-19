@@ -4,7 +4,7 @@ class up{
     {
 
     }
-    upload_data(jwt){
+    upload_data(jwt,cols,table){
         var uploadButt = document.getElementById('upload');
         const processor1 = new processor();
 
@@ -20,7 +20,7 @@ class up{
             fetch('http://127.0.0.1:5000/upload_data', {
             method: 'POST',
             headers: myHeaders,
-            body: JSON.stringify({'data':json_df}),
+            body: JSON.stringify({'data':json_df,'cols':cols,'table':table}),
             }).then(response => response.json()).then(response =>console.log(response))
         })
 

@@ -26,8 +26,9 @@ console.log(accessToken);
   //     }
   //     console.log(user);
   // });
-
-  upload.upload_data(accessToken);
+  cols = ['DATE','COUNTRY','CITY','STORE','BRAND','PRODUCT','SOLDUNITS','ONHANDUNITS','SOLDAMOUNT','ONHANDAMOUNT']
+  table = 'pos'
+  upload.upload_data(accessToken,cols,table);
   //button animation and logout functionality
   var $button = document.querySelector('#log_out');
   $button.addEventListener('click', function() {
