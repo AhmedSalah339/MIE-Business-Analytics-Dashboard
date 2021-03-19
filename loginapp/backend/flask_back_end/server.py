@@ -41,12 +41,17 @@ def upload_data(jwt):
 	data = body.get('data',None)
 	print(data)
 	if not (data):
+		print('no data')
 		abort(400)
+
 	cols = body.get('cols',None)
+	print(cols)
 	if not (cols):
+		print('no cols')
 		abort(400)
 	table = body.get('table',None)
 	if not (table):
+		print('no table')
 		abort(400)
 	engine = create_engine(con_str)
 	domain = 'dev-8tto1d7k.eu.auth0.com'
