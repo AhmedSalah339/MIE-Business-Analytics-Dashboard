@@ -2,17 +2,66 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 // ----------------------------------------------------------------------------
-
 let models = window["powerbi-client"].models;
 let reportContainer = $("#report-container").get(0);
 
 // Initialize iframe for embedding report
 powerbi.bootstrap(reportContainer, { type: "report" });
+class embed{
+    constructor()
+    {
+        
 
+    }
+    render_report(reportLoadConfig){
+        // Use the token expiry to regenerate Embed token for seamless end user experience
+            // Refer https://aka.ms/RefreshEmbedToken
+            
+    
+            // Embed Power BI report when Access token and Embed URL are available
+            let report = powerbi.embed(reportContainer, reportLoadConfig);
+    
+            // Clear any other loaded handler events
+            report.off("loaded");
+    
+            // Triggers when a report schema is successfully loaded
+            report.on("loaded", function () {
+                console.log("Report load successful");
+            });
+    
+            // Clear any other rendered handler events
+            report.off("rendered");
+    
+            // Triggers when a report is successfully embedded in UI
+            report.on("rendered", function () {
+                console.log("Report render successful");
+            });
+    
+            // Clear any other error handler events
+            report.off("error");
+    
+            // Handle embed errors
+            report.on("error", function (event) {
+                let errorMsg = event.detail;
+                console.error(errorMsg);
+                return;
+            });
+    }
+    
+    embed_report(accessToken,report_num){
+
+ let report =  localStorage.getItem('report'+report_num);
+// const accessToken = await localStorage.getItem('accessToken');
+// console.log(accessToken)
 // AJAX request to get the report details from the API and pass it to the UI
+if(report){
+    report = JSON.parse(report);
+    let emb = new embed();
+    emb.render_report(report);}
+else{
 $.ajax({
     type: "GET",
-    url: "/getEmbedToken",
+    url: "/getEmbedToken?accessToken="+accessToken+"&report_num="+report_num,
     dataType: "json",
     success: function (embedData) {
 
@@ -30,39 +79,10 @@ $.ajax({
             //     background: models.BackgroundType.Transparent
             // }
         };
-
-        // Use the token expiry to regenerate Embed token for seamless end user experience
-        // Refer https://aka.ms/RefreshEmbedToken
-        tokenExpiry = embedData.expiry;
-
-        // Embed Power BI report when Access token and Embed URL are available
-        let report = powerbi.embed(reportContainer, reportLoadConfig);
-
-        // Clear any other loaded handler events
-        report.off("loaded");
-
-        // Triggers when a report schema is successfully loaded
-        report.on("loaded", function () {
-            console.log("Report load successful");
-        });
-
-        // Clear any other rendered handler events
-        report.off("rendered");
-
-        // Triggers when a report is successfully embedded in UI
-        report.on("rendered", function () {
-            console.log("Report render successful");
-        });
-
-        // Clear any other error handler events
-        report.off("error");
-
-        // Handle embed errors
-        report.on("error", function (event) {
-            let errorMsg = event.detail;
-            console.error(errorMsg);
-            return;
-        });
+        let tokenExpiry = embedData.expiry;
+        emb = new embed();
+        emb.render_report(reportLoadConfig);
+        localStorage.setItem('report'+report_num, JSON.stringify(reportLoadConfig));
     },
 
     error: function (err) {
@@ -97,6 +117,9 @@ $.ajax({
             let node = document.createTextNode(element);
             errorContent.appendChild(node);
             errContainer.appendChild(errorContent);
-        });
+                    });
+                }
+            }); 
+        }
     }
-});
+}
