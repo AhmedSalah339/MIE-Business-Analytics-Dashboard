@@ -2,17 +2,24 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 // ----------------------------------------------------------------------------
+class embed{
+    constructor()
+    {
+
+    }
+    embed_report(accessToken){
 
 let models = window["powerbi-client"].models;
 let reportContainer = $("#report-container").get(0);
 
 // Initialize iframe for embedding report
 powerbi.bootstrap(reportContainer, { type: "report" });
-
+// const accessToken = await localStorage.getItem('accessToken');
+console.log(accessToken)
 // AJAX request to get the report details from the API and pass it to the UI
 $.ajax({
     type: "GET",
-    url: "/getEmbedToken",
+    url: "/getEmbedToken?accessToken="+accessToken,
     dataType: "json",
     success: function (embedData) {
 
@@ -33,7 +40,7 @@ $.ajax({
 
         // Use the token expiry to regenerate Embed token for seamless end user experience
         // Refer https://aka.ms/RefreshEmbedToken
-        tokenExpiry = embedData.expiry;
+        let tokenExpiry = embedData.expiry;
 
         // Embed Power BI report when Access token and Embed URL are available
         let report = powerbi.embed(reportContainer, reportLoadConfig);
@@ -100,3 +107,5 @@ $.ajax({
         });
     }
 });
+}
+}

@@ -2,7 +2,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 // ----------------------------------------------------------------------------
-
+const auth0 = require('auth0-js')
 const auth = require(__dirname + "/authentication.js");
 const config = require(__dirname + "/../config/config.json");
 const utils = require(__dirname + "/utils.js");
@@ -14,13 +14,13 @@ const fetch = require('node-fetch');
  * Generate embed token and embed urls for reports
  * @return Details like Embed URL, Access token and Expiry
  */
-async function getEmbedInfo() {
+async function getEmbedInfo(accessToken) {
 
     // Get the Report Embed details
     try {
-
+        
         // Get report details and embed token
-        const embedParams = await getEmbedParamsForSingleReport(config.workspaceId, config.reportId);
+        const embedParams = await getEmbedParamsForSingleReport(config.workspaceId, config.reportId,accessToken);
 
         return {
             'accessToken': embedParams.embedToken.token,
@@ -30,8 +30,8 @@ async function getEmbedInfo() {
         };
     } catch (err) {
         return {
-            'status': err.status,
-            'error': `Error while retrieving report embed details\r\n${err.statusText}\r\nRequestId: \n${err.headers.get('requestid')}`
+            'status': err,
+            // 'error': `Error while retrieving report embed details\r\n${err.statusText}\r\nRequestId: \n${err.headers.get('requestid')}`
         }
     }
 }
@@ -43,7 +43,7 @@ async function getEmbedInfo() {
  * @param {string} additionalDatasetId - Optional Parameter
  * @return EmbedConfig object
  */
-async function getEmbedParamsForSingleReport(workspaceId, reportId, additionalDatasetId) {
+async function getEmbedParamsForSingleReport(workspaceId, reportId,accessToken, additionalDatasetId) {
     const reportInGroupApi = `https://api.powerbi.com/v1.0/myorg/groups/${workspaceId}/reports/${reportId}`;
     const headers = await getRequestHeader();
 
@@ -76,7 +76,7 @@ async function getEmbedParamsForSingleReport(workspaceId, reportId, additionalDa
     }
 
     // Get Embed token multiple resources
-    reportEmbedConfig.embedToken = await getEmbedTokenForSingleReportSingleWorkspace(reportId, datasetIds, workspaceId);
+    reportEmbedConfig.embedToken = await getEmbedTokenForSingleReportSingleWorkspace(reportId, datasetIds, workspaceId,accessToken);
     return reportEmbedConfig;
 }
 
@@ -143,7 +143,7 @@ async function getEmbedParamsForMultipleReports(workspaceId, reportIds, addition
  * @param {string} targetWorkspaceId - Optional Parameter
  * @return EmbedToken
  */
-async function getEmbedTokenForSingleReportSingleWorkspace(reportId, datasetIds, targetWorkspaceId) {
+async function getEmbedTokenForSingleReportSingleWorkspace(reportId, datasetIds, targetWorkspaceId,accessToken) {
 
     // Add report id in the request
     let formData = {
@@ -167,7 +167,40 @@ async function getEmbedTokenForSingleReportSingleWorkspace(reportId, datasetIds,
             'id': targetWorkspaceId
         })
     }
+    // fetch()
 
+
+//     var webAuth = new auth0.WebAuth({
+//         domain:       'dev-8tto1d7k.eu.auth0.com',
+//         clientID:     'B7L6Fztdma1RJBZx830uTvwLl5ihgeoE'
+//       });
+//       user = await webAuth.client.userInfo(accessToken, function(err, user) {
+//       // This method will make a request to the /userinfo endpoint
+//       // and return the user object, which contains the user's information,
+//       // similar to the response below.
+//       if (err) {
+//         return console.log(err);
+//       }
+//       console.log(user);
+//       return user
+//   });
+    
+    // myHeaders.append();
+    var response = await fetch('https://'+'dev-8tto1d7k.eu.auth0.com'+'/userinfo',{
+        method: 'GET',
+        headers: {'Authorization': 'Bearer '+accessToken},
+        
+        }).then(response =>  response.json())
+        
+    var user = response['email'];
+    formData['identities'] = [{"username":user,"roles":["basic"],'datasets':[]}]
+    for (const datasetId of datasetIds) {
+        formData['identities'][0]['datasets'].push(
+             datasetId
+        )
+    }
+    // formData['identities'].push(,"datasets":datasetId})
+    console.log(formData)
     const embedTokenApi = "https://api.powerbi.com/v1.0/myorg/GenerateToken";
     const headers = await getRequestHeader();
 
@@ -181,6 +214,10 @@ async function getEmbedTokenForSingleReportSingleWorkspace(reportId, datasetIds,
     if (!result.ok)
         throw result;
     return result.json();
+        
+    
+    
+    
 }
 
 /**
