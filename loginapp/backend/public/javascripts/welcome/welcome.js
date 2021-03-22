@@ -45,10 +45,10 @@ console.log(accessToken);
   // upload functionality
   
   const upload = new up();
-const emb = new embed();
+  const emb = new embed();
   
   upload.upload_data(accessToken);
-  emb.embed_report(accessToken);
+  emb.embed_report(accessToken,1);
   localStorage.setItem('accessToken', accessToken);
   //button animation and logout functionality
   var $button = document.querySelector('#log_out');

@@ -37,9 +37,9 @@ function validateConfig() {
         return "ReportId is empty. Please select a report you own and fill its Id in config.json.";
     }
 
-    if (!guid.isGuid(config.reportId)) {
-        return "ReportId must be a Guid object. Please select a report you own and fill its Id in config.json.";
-    }
+    // if (!guid.isGuid(config.reportId)) {
+    //     return "ReportId must be a Guid object. Please select a report you own and fill its Id in config.json.";
+    // }
 
     if (!config.workspaceId) {
         return "WorkspaceId is empty. Please select a group you own and fill its Id in config.json.";
