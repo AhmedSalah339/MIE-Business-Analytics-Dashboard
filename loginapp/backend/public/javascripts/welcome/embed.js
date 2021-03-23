@@ -50,7 +50,7 @@ class embed{
     
     embed_report(accessToken,report_num){
 
- let report =  localStorage.getItem('report'+report_num);
+ let report =  sessionStorage.getItem('report'+report_num);
 // const accessToken = await localStorage.getItem('accessToken');
 // console.log(accessToken)
 // AJAX request to get the report details from the API and pass it to the UI
@@ -82,7 +82,7 @@ $.ajax({
         let tokenExpiry = embedData.expiry;
         emb = new embed();
         emb.render_report(reportLoadConfig);
-        localStorage.setItem('report'+report_num, JSON.stringify(reportLoadConfig));
+        sessionStorage.setItem('report'+report_num, JSON.stringify(reportLoadConfig));
     },
 
     error: function (err) {
