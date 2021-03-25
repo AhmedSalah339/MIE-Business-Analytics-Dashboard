@@ -1,3 +1,7 @@
+// localStorage.clear();
+sessionStorage.removeItem('report1');
+sessionStorage.removeItem('report2');
+sessionStorage.removeItem('report3');
 var webAuth = new auth0.WebAuth({
   domain:       'dev-8tto1d7k.eu.auth0.com',
   clientID:     'B7L6Fztdma1RJBZx830uTvwLl5ihgeoE'
