@@ -34,7 +34,9 @@
   text-transform: uppercase;
   }
   
-
+.hold{
+  height: 720px;
+}
   input:checked + .slider {
     background-color: #2196F3;
   }
@@ -72,12 +74,12 @@ section#text-container > div > p {
 }
 
 section#report-container {
-  height: calc(0.5625 * 60vw); /* 16:9 aspect ratio */
+  height: 720px; /* 16:9 aspect ratio */
 }
 
 @media only screen and (max-width: 575px) {
   section#report-container {
-      height: calc(0.5625 * 100vw); /* 16:9 aspect ratio */
+      height: 720px; /* 16:9 aspect ratio */
   }
 }
 
