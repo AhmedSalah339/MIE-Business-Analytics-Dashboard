@@ -64,12 +64,14 @@ $.ajax({
     url: "/getEmbedToken?accessToken="+accessToken+"&report_num="+report_num,
     dataType: "json",
     success: function (embedData) {
+        let permissions = models.Permissions.All;
 
         // Create a config object with type of the object, Embed details and Token Type
         let reportLoadConfig = {
             type: "report",
             tokenType: models.TokenType.Embed,
             accessToken: embedData.accessToken,
+            permissions: permissions,
 
             // Use other embed report config based on the requirement. We have used the first one for demo purpose
             embedUrl: embedData.embedUrl[0].embedUrl,
@@ -78,6 +80,18 @@ $.ajax({
             // settings: {
             //     background: models.BackgroundType.Transparent
             // }
+            viewMode: models.ViewMode.Edit,
+            // settings: {
+            //     panes: {
+            //         filters: {
+            //             visible: true
+            //         },
+            //         pageNavigation: {
+            //             visible: true
+            //         }
+            //     }
+            // }
+            
         };
         let tokenExpiry = embedData.expiry;
         emb = new embed();
