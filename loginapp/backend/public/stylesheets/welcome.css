@@ -74,12 +74,12 @@ section#text-container > div > p {
 }
 
 section#report-container {
-  height: 720px; /* 16:9 aspect ratio */
+  height: 320px; /* 16:9 aspect ratio */
 }
 
 @media only screen and (max-width: 575px) {
   section#report-container {
-      height: 720px; /* 16:9 aspect ratio */
+      height: 320px; /* 16:9 aspect ratio */
   }
 }
 

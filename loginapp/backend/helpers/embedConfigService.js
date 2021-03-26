@@ -360,5 +360,6 @@ async function getRequestHeader() {
 }
 
 module.exports = {
-    getEmbedInfo: getEmbedInfo
+    getEmbedInfo: getEmbedInfo,
+    getRequestHeader:getRequestHeader
 }

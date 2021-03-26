@@ -3,13 +3,13 @@ const utils = require(__dirname + "/../helpers/utils.js");
 let embedToken = require(__dirname + '/../helpers/embedConfigService.js');
 module.exports.getEmbedToken = async function (req, res) {
     const config = require(__dirname + "/../config/config.json");
-    console.log(config.reportId[0])
+    console.log(config.reportId[0]);
     // Validate whether all the required configurations are provided in config.json
-    const accessToken = req.query.accessToken
-    const report_num = req.query.report_num
-    console.log(accessToken)
+    const accessToken = req.query.accessToken;
+    const report_num = req.query.report_num;
+    console.log(accessToken);
     configCheckResult = utils.validateConfig();
-    console.log(configCheckResult)
+    console.log(configCheckResult);
     if (configCheckResult) {
         return {
             "status": 400,
