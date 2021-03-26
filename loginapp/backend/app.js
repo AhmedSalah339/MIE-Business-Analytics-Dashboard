@@ -10,6 +10,7 @@ var indexRouter = require('./routes/index');
 var welcomeRouter = require('./routes/welcome');
 var unauthorizedRouter = require('./routes/unauth');
 var getEmbedToken = require('./routes/getEmbedToken');
+var refresh = require('./routes/refresh');
 var app = express();
 
 // view engine setup
@@ -26,6 +27,7 @@ app.use('/', indexRouter);
 app.use('/welcome', welcomeRouter);
 app.use('/unauthorized', unauthorizedRouter);
 app.use('/getEmbedToken', getEmbedToken);
+app.use('/refresh', refresh);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

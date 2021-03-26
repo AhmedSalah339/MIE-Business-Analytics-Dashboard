@@ -1,3 +1,7 @@
+var report1_butt = document.getElementById('report1');
+var report2_butt = document.getElementById('report2');
+var report3_butt = document.getElementById('report3');
+var emb = new embed();
 class up{
  
     constructor()
@@ -9,9 +13,7 @@ class up{
     upload_data(jwt){
         function get_cols_table(){
             return new Promise((resolve, reject) => {
-            var report1_butt = document.getElementById('report1');
-            var report2_butt = document.getElementById('report2');
-            var report3_butt = document.getElementById('report3');
+            
             
             if (report1_butt.checked===true){
                 let cols = ['DATE','COUNTRY','CITY','STORE','BRAND','PRODUCT','SOLDUNITS','ONHANDUNITS','SOLDAMOUNT','ONHANDAMOUNT']
@@ -32,10 +34,12 @@ class up{
         })
         }
         var uploadButt = document.getElementById('upload');
+        console.log('reeee')
         
         const processor1 = new processor();
 
         uploadButt.onchange = function(e) {
+            console.log('reeee')
             
            
             
@@ -59,7 +63,35 @@ class up{
             method: 'POST',
             headers: myHeaders,
             body: JSON.stringify({'data':json_df,'cols':cols,'table':table}),
-            }).then(response => response.json()).then(response =>console.log(response))
+            }).then(response => response.json()).then(response =>{
+                console.log(response);
+                if(response['success']){
+                    var dataset_num = 0;
+                    if (report1_butt.checked===true){
+                        dataset_num=1}
+                    else if (report2_butt.checked===true){dataset_num=2}else if (report3_butt.checked===true){dataset_num=3}
+                    $.ajax({
+                        type: "GET",
+                        url: '/refresh?accessToken='+jwt+'&dataset_num='+dataset_num,
+                        dataType: "json",
+                        success: function (response) {
+                            console.log('refreshed');
+                            console.log(response)
+                            
+                        // emb.embed_report(accessToken,dataset_num,false);
+                    }})
+
+                    
+                    // fetch('https://localhost:3000/refresh?dataset_num='+dataset_num, {
+                    // method: 'GET',
+                    // headers: myHeaders}).then(response => response.json()).then(response =>console.log(response)).then(response =>{
+                    //     var accessToken = localStorage.getItem('accessToken');
+                    //     embed_report(accessToken,dataset_num);
+                    // }
+
+                    // )
+
+                }})
         })
     });
 
