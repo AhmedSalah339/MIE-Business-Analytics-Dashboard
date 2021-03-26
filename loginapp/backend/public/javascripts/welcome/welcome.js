@@ -52,7 +52,7 @@ console.log(accessToken);
   const emb = new embed();
   
   upload.upload_data(accessToken);
-  emb.embed_report(accessToken,1);
+  emb.embed_report(accessToken,1,false);
   localStorage.setItem('accessToken', accessToken);
   //button animation and logout functionality
   var $button = document.querySelector('#log_out');

@@ -70,16 +70,16 @@ class up{
                     if (report1_butt.checked===true){
                         dataset_num=1}
                     else if (report2_butt.checked===true){dataset_num=2}else if (report3_butt.checked===true){dataset_num=3}
-                    $.ajax({
-                        type: "GET",
-                        url: '/refresh?accessToken='+jwt+'&dataset_num='+dataset_num,
-                        dataType: "json",
-                        success: function (response) {
-                            console.log('refreshed');
-                            console.log(response)
+                    // $.ajax({
+                    //     type: "GET",
+                    //     url: '/refresh?accessToken='+jwt+'&dataset_num='+dataset_num,
+                    //     dataType: "json",
+                    //     success: function (response) {
+                    //         console.log('refreshed');
+                    //         console.log(response)
                             
-                        // emb.embed_report(accessToken,dataset_num,false);
-                    }})
+                    // emb.embed_report(accessToken,dataset_num,true);
+                    // }})
 
                     
                     // fetch('https://localhost:3000/refresh?dataset_num='+dataset_num, {
