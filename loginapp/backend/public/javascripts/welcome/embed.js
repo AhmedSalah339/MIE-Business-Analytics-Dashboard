@@ -49,6 +49,7 @@ class embed{
     }
     
     embed_report(accessToken,report_num,force_refresh){
+        powerbi.reset(reportContainer);
 
  let report =  sessionStorage.getItem('report'+report_num);
 // const accessToken = await localStorage.getItem('accessToken');

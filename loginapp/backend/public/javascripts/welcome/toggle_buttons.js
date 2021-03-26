@@ -9,21 +9,21 @@ $(".switch:not([checked])").on('change' , function(){
   // let reportContainer = $("#report-container").get(0);
   report1.addEventListener('click',function(){
     if(this.checked){
-      powerbi.reset(reportContainer);
+      // powerbi.reset(reportContainer);
       const accessToken =  localStorage.getItem('accessToken');
       emb.embed_report(accessToken,1,false)
     }
   } )
   report2.addEventListener('click',function(){
     if(this.checked){
-      powerbi.reset(reportContainer);
+      // powerbi.reset(reportContainer);
       const accessToken =  localStorage.getItem('accessToken');
       emb.embed_report(accessToken,2,false)
     }
   } )
   report3.addEventListener('click',function(){
     if(this.checked){
-      powerbi.reset(reportContainer);
+      // powerbi.reset(reportContainer);
       const accessToken =  localStorage.getItem('accessToken');
       emb.embed_report(accessToken,3,false)
     }

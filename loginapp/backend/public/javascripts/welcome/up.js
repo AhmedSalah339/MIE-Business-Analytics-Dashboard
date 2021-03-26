@@ -78,7 +78,7 @@ class up{
                     //         console.log('refreshed');
                     //         console.log(response)
                             
-                    // emb.embed_report(accessToken,dataset_num,true);
+                    emb.embed_report(accessToken,dataset_num,false);
                     // }})
 
                     
