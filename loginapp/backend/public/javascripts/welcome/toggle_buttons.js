@@ -11,21 +11,21 @@ $(".switch:not([checked])").on('change' , function(){
     if(this.checked){
       powerbi.reset(reportContainer);
       const accessToken =  localStorage.getItem('accessToken');
-      emb.embed_report(accessToken,1)
+      emb.embed_report(accessToken,1,false)
     }
   } )
   report2.addEventListener('click',function(){
     if(this.checked){
       powerbi.reset(reportContainer);
       const accessToken =  localStorage.getItem('accessToken');
-      emb.embed_report(accessToken,2)
+      emb.embed_report(accessToken,2,false)
     }
   } )
   report3.addEventListener('click',function(){
     if(this.checked){
       powerbi.reset(reportContainer);
       const accessToken =  localStorage.getItem('accessToken');
-      emb.embed_report(accessToken,3)
+      emb.embed_report(accessToken,3,false)
     }
   } )
 // function arrayRemove(arr, value) { 

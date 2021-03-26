@@ -48,13 +48,13 @@ class embed{
             });
     }
     
-    embed_report(accessToken,report_num){
+    embed_report(accessToken,report_num,force_refresh){
 
  let report =  sessionStorage.getItem('report'+report_num);
 // const accessToken = await localStorage.getItem('accessToken');
 // console.log(accessToken)
 // AJAX request to get the report details from the API and pass it to the UI
-if(report){
+if(report && !force_refresh){
     report = JSON.parse(report);
     let emb = new embed();
     emb.render_report(report);}
