@@ -30,7 +30,7 @@ $button.addEventListener('click', function() {
   var url = webAuth.client.buildAuthorizeUrl({
     clientID: "B7L6Fztdma1RJBZx830uTvwLl5ihgeoE", // string
     responseType: 'token', // code or token
-    redirectUri: 'http://localhost:3000/welcome/',
+    redirectUri: 'https://serene-chamber-01526.herokuapp.com/welcome/',
     scope: 'openid profile email',state:state,
     audience :'BI'
   });

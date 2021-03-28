@@ -8,7 +8,7 @@ import uuid
 
 from sqlalchemy import create_engine
 # from .database.models import db_drop_and_create_all, setup_db, Drink
-from auth.auth import AuthError, requires_auth
+from .auth.auth import AuthError, requires_auth
 import requests
 app = Flask(__name__)
 # setup_db(app)
@@ -111,5 +111,3 @@ def unprocessable(error):
                     "error": 500,
                     "message": "internalservererror"
                     }), 500
-if __name__ == '__main__':
-    app.run()
