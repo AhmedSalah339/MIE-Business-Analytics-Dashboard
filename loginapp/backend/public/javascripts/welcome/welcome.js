@@ -37,15 +37,20 @@ if (state == localStorage.getItem('state') )
   var report1_butt = document.getElementById('report1');
   report1_butt.checked = true;
 console.log(accessToken);
-  // webAuth.client.userInfo(accessToken, function(err, user) {
-  //     // This method will make a request to the /userinfo endpoint
-  //     // and return the user object, which contains the user's information,
-  //     // similar to the response below.
-  //     if (err) {
-  //       return console.log(err);
-  //     }
-  //     console.log(user);
-  // });
+  webAuth.client.userInfo(accessToken, function(err, user) {
+      // This method will make a request to the /userinfo endpoint
+      // and return the user object, which contains the user's information,
+      // similar to the response below.
+      email = user['email']
+      let em = $("#email").get(0);
+      em.innerHTML = email;
+      
+
+      if (err) {
+        return console.log(err);
+      }
+      console.log(user);
+  });
   // upload functionality
   
   const upload = new up();
@@ -63,7 +68,7 @@ console.log(accessToken);
   TweenMax.to($button, duration, {scaleX: 1.2, scaleY: 1, ease: Back.easeOut, easeParams: [3], delay: delay});
   TweenMax.to($button, duration * 1.25, {scaleX: 1, scaleY: 1, ease: Back.easeOut, easeParams: [6], delay: delay * 3 });
   webAuth.logout({
-    returnTo: 'http://localhost:3000/',
+    returnTo: 'https://serene-chamber-01526.herokuapp.com/',
     client_id: 'B7L6Fztdma1RJBZx830uTvwLl5ihgeoE'
   });
 
@@ -72,7 +77,7 @@ console.log(accessToken);
 }
 
 else{
-  url = 'https://localhost:3000/unauthorized';
+  url = 'https://serene-chamber-01526.herokuapp.com/unauthorized';
   console.log('not authorized');
   window.location.href = url;
 }

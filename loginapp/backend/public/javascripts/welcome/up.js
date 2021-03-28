@@ -59,7 +59,7 @@ class up{
             myHeaders.append('Content-Type', 'application/json');
             myHeaders.append('Authorization', 'Bearer '+jwt);
 
-            fetch('http://127.0.0.1:5000/upload_data', {
+            fetch('https://upload-mie.herokuapp.com/upload_data', {
             method: 'POST',
             headers: myHeaders,
             body: JSON.stringify({'data':json_df,'cols':cols,'table':table}),
